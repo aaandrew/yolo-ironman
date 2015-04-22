@@ -105,6 +105,7 @@ app.engine('handlebars', handlebars({defaultLayout: 'layout'}));
 app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/views');
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
