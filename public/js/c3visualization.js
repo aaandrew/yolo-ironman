@@ -5,14 +5,17 @@
         return item.counts.media;
       });
       
-      yCounts.unshift('Media Count');
-
+      yCounts.unshift('Media_Count');
       var chart = c3.generate({
         bindto: '#c3chart',
         data: {
           columns: [
             yCounts 
-          ]
+          ], types: {
+            Media_Count: 'area-spline',
+            data2: 'area-spline'
+          },
+          groups: [['Media_Count', 'data2']]
         }
       });
     });

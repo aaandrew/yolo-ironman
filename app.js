@@ -12,6 +12,10 @@ var dotenv = require('dotenv');
 var mongoose = require('mongoose');
 var Instagram = require('instagram-node-lib');
 var async = require('async');
+
+var TwitterStrategy = require('passport-twitter').Strategy;
+var twit = require('twit');
+
 var app = express();
 
 //local dependencies
@@ -86,6 +90,57 @@ passport.use(new InstagramStrategy({
       } else {
         //update user here
         user.ig_access_token = accessToken;
+        user.save();
+        process.nextTick(function () {
+          // To keep the example simple, the user's Instagram profile is returned to
+          // represent the logged-in user.  In a typical application, you would want
+          // to associate the Instagram account with a user record in your database,
+          // and return that user instead.
+          return done(null, user);
+        });
+      }
+   });
+  }
+));
+
+var TWITTER_CLIENT_ID = process.env.TWITTER_CLIENT_ID;
+var TWITTER_CLIENT_SECRET = process.env.TWITTER_CLIENT_SECRET;
+var TWITTER_CALLBACK_URL = process.env.TWITTER_CALLBACK_URL;
+
+passport.use(new TwitterStrategy({
+    consumerKey: TWITTER_CLIENT_ID,
+    consumerSecret: TWITTER_CLIENT_SECRET,
+    callbackURL: TWITTER_CALLBACK_URL
+  },
+  function(accessToken, tokenSecret, profile, done) {
+    models.User.findOne({
+    "ig_id": profile.id
+   }, function(err, user) {
+      if (err) {
+        return done(err); 
+      }
+      
+      //didnt find a user
+      if (!user) {
+        newUser = new models.User({
+          name: profile.username, 
+          ig_id: profile.id,
+          ig_access_token: accessToken,
+          secret_token: tokenSecret
+        });
+
+        newUser.save(function(err) {
+          if(err) {
+            console.log(err);
+          } else {
+            console.log('user: ' + newUser.name + " created.");
+          }
+          return done(null, newUser);
+        });
+      } else {
+        //update user here
+        user.ig_access_token = accessToken;
+        user.secret_token = tokenSecret;
         user.save();
         process.nextTick(function () {
           // To keep the example simple, the user's Instagram profile is returned to
@@ -217,6 +272,47 @@ app.get('/igMediaCounts', ensureAuthenticatedInstagram, function(req, res){
   });
 });
 
+
+app.get('/twitterMediaCounts', ensureAuthenticatedInstagram, function(req, res){
+  var query  = models.User.where({ ig_id: req.user.ig_id });
+  query.findOne(function (err, user) {
+    if (err) return err;
+    if (user) {
+      var Twit = new twit({
+        consumer_key:         TWITTER_CLIENT_ID,
+        consumer_secret:      TWITTER_CLIENT_SECRET,
+        access_token:         user.ig_access_token,
+        access_token_secret:  user.secret_token
+      });
+      Twit.get('trends/place', { id: 1 }, function(err, data, response) {
+        if(err) return err;
+        var trends = data[0].trends.slice(0, data[0].trends.length/2);
+        var asyncTasks = [];
+        var trendsCount = [];
+        trends.forEach(function(item){
+          asyncTasks.push(function(callback){
+            Twit.get('search/tweets', { q: item.query, count: 100 }, function(err, data, response){
+              if(err) return err;
+              var total = 0;
+              for(i in data.statuses){
+                total += data.statuses[i].retweet_count;
+              }
+              var obj = {};
+              obj[item.name] = total;
+              trendsCount.push(obj);
+              callback();
+            });           
+          });
+        });
+        async.parallel(asyncTasks, function(err){
+          if (err) return err;
+          return res.json({trends: trendsCount});        
+        });
+      });  
+    }
+  });
+});
+
 app.get('/visualization', ensureAuthenticatedInstagram, function (req, res){
   res.render('visualization');
 }); 
@@ -237,6 +333,15 @@ app.get('/auth/instagram/callback',
   passport.authenticate('instagram', { failureRedirect: '/login'}),
   function(req, res) {
     res.redirect('/account');
+  });
+
+app.get('/auth/twitter',
+  passport.authenticate('twitter'));
+
+app.get('/auth/twitter/callback', 
+  passport.authenticate('twitter', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/c3visualization');
   });
 
 app.get('/logout', function(req, res){
