@@ -20,19 +20,21 @@ var yAxis = d3.svg.axis()
   .orient("left");
 
 //create svg
-var svg = d3.select("#d3chart").append("svg")
+var svg = d3.select("#d3starterchart").append("svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 //get json object which contains media counts
-d3.json('/igMediaCounts', function(error, data) {
-  console.log("dataaaa", data);
+d3.json('/twitterMediaCounts', function(error, data) {
   //set domain of x to be all the usernames contained in the data
-  scaleX.domain(data.users.map(function(d) { return d.username; }));
+  scaleX.domain(data.friends.map(function(d) { return d.name; }));
+
   //set domain of y to be from 0 to the maximum media count returned
-  scaleY.domain([0, d3.max(data.users, function(d) { return d.counts.media; })]);
+  var max = d3.max(data.friends, function(d) { return d.count; });
+  if(max > 1000000)
+  scaleY.domain([0, 1000000]);
 
   //set up x axis
   svg.append("g")
@@ -56,15 +58,15 @@ d3.json('/igMediaCounts', function(error, data) {
     .attr("y", 6)
     .attr("dy", ".71em")
     .style("text-anchor", "end")
-    .text("Number of Photos");
+    .text("Number of Followers");
 
   //set up bars in bar graph
   svg.selectAll(".bar")
-    .data(data.users)
+    .data(data.friends)
     .enter().append("rect")
     .attr("class", "bar")
-    .attr("x", function(d) { return scaleX(d.username); })
+    .attr("x", function(d) { return scaleX(d.name); })
     .attr("width", scaleX.rangeBand())
-    .attr("y", function(d) { return scaleY(d.counts.media); })
-    .attr("height", function(d) { return height - scaleY(d.counts.media); });
+    .attr("y", function(d) { return scaleY(d.count); })
+    .attr("height", function(d) { return height - scaleY(d.count); });
 });

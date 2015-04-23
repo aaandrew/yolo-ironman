@@ -1,5 +1,5 @@
 (function() {
-  $.getJSON( '/twitterMediaCounts')
+  $.getJSON( '/twitterTrends')
     .done(function(data) {
       var cols = data.trends.map(function(item){
         for(i in item){

@@ -273,7 +273,7 @@ app.get('/igMediaCounts', ensureAuthenticatedInstagram, function(req, res){
 });
 
 
-app.get('/twitterMediaCounts', ensureAuthenticatedInstagram, function(req, res){
+app.get('/twitterTrends', ensureAuthenticatedInstagram, function(req, res){
   var query  = models.User.where({ ig_id: req.user.ig_id });
   query.findOne(function (err, user) {
     if (err) return err;
@@ -313,6 +313,34 @@ app.get('/twitterMediaCounts', ensureAuthenticatedInstagram, function(req, res){
   });
 });
 
+app.get('/twitterMediaCounts', ensureAuthenticatedInstagram, function(req, res){
+  var query  = models.User.where({ ig_id: req.user.ig_id });
+  query.findOne(function (err, user) {
+    if (err) return err;
+    if (user) {
+      var Twit = new twit({
+        consumer_key:         TWITTER_CLIENT_ID,
+        consumer_secret:      TWITTER_CLIENT_SECRET,
+        access_token:         user.ig_access_token,
+        access_token_secret:  user.secret_token
+      });
+      Twit.get('friends/ids', { user_id: user.ig_id, count: 20 }, function(err, data, response) {
+        if(err) return err;
+        var friends = data.ids;
+        var retFriends = [];
+        var queryString = friends.reduce(function(a, x){return a + x +',';}, '');
+        Twit.get('users/lookup', {user_id: queryString}, function(err, data, response){
+          if(err) return err;
+          for(var i in data){
+            retFriends.push({name: data[i].name, count: data[i].followers_count});
+          }
+          return res.json({friends: retFriends}); 
+        });
+      });
+    }
+  });
+});
+
 app.get('/visualization', ensureAuthenticatedInstagram, function (req, res){
   res.render('visualization');
 }); 
@@ -341,9 +369,12 @@ app.get('/auth/twitter',
 app.get('/auth/twitter/callback', 
   passport.authenticate('twitter', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/c3visualization');
+    res.redirect('/d3twittervis');
   });
 
+app.get('/d3twittervis', ensureAuthenticatedInstagram, function (req, res){
+  res.render('d3twittervis');
+}); 
 app.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
