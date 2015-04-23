@@ -1,9 +1,18 @@
-<p>ID: {{user.id}}</p>
-<p>Name: {{user.name}}</p>
-<p>Instagram ID:{{user.ig_id}}</p>
-
-<a href="/c3visualization">view C3 visualization</a>
-<br/>
-<a href="/visualization">view D3 visualization</a>
-
-
+<div id="fullpage">
+    <div class="section" id="section0">
+    	<p>ID: {{user.id}}</p>
+    	<p>Name: {{user.name}}</p>
+    	<p>Instagram ID:{{user.ig_id}}</p>
+    </div>
+    <div class="section" id="seciton1">
+    	{{!-- <a href="/c3visualization">view C3 visualization</a>--}}
+    	<h1> Media Count of Your Instagram Followers using C3JS </h1>
+    	<div id="c3chart"></div>
+    	<script src="js/c3visualization.js"></script>
+    </div>
+	    <div class="section" id="section2">
+    	<h1> Media Count of Your Instagram Followers </h1>
+    	<div id="d3chart"></div>
+    	<script src="js/visualization.js"></script>
+    </div>
+</div>

@@ -8,7 +8,7 @@
       yCounts.unshift('Media Count');
 
       var chart = c3.generate({
-        bindto: '#chart',
+        bindto: '#c3chart',
         data: {
           columns: [
             yCounts 
