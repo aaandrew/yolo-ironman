@@ -7,7 +7,7 @@ var scaleX = d3.scale.ordinal()
   .rangeRoundBands([0, width], .1);
 
 //define scale of y to be from the height of SVG to 0
-var scaleY = d3.scale.linear()
+var scaleY = d3.scale.sqrt()
   .range([height, 0]);
 
 //define axes
@@ -33,8 +33,8 @@ d3.json('/twitterMediaCounts', function(error, data) {
 
   //set domain of y to be from 0 to the maximum media count returned
   var max = d3.max(data.friends, function(d) { return d.count; });
-  if(max > 1000000)
-  scaleY.domain([0, 1000000]);
+  //f(max > 1000000)
+  scaleY.domain([0, max*0.75]);
 
   //set up x axis
   svg.append("g")
