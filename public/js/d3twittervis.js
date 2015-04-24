@@ -1,4 +1,4 @@
-var margin = {top: 20, right: 20, bottom: 100, left: 40};
+var margin = {top: 20, right: 20, bottom: 40, left: 40};
 var width = 960 - margin.left - margin.right;
 var height = 500 - margin.top - margin.bottom;
 
@@ -7,7 +7,7 @@ var scaleX = d3.scale.ordinal()
   .rangeRoundBands([0, width], .1);
 
 //define scale of y to be from the height of SVG to 0
-var scaleY = d3.scale.sqrt()
+var scaleY = d3.scale.pow().exponent(0.35)
   .range([height, 0]);
 
 //define axes
@@ -34,7 +34,7 @@ d3.json('/twitterMediaCounts', function(error, data) {
   //set domain of y to be from 0 to the maximum media count returned
   var max = d3.max(data.friends, function(d) { return d.count; });
   //f(max > 1000000)
-  scaleY.domain([0, max*0.75]);
+  scaleY.domain([0, max]);
 
   //set up x axis
   svg.append("g")
@@ -62,11 +62,43 @@ d3.json('/twitterMediaCounts', function(error, data) {
 
   //set up bars in bar graph
   svg.selectAll(".bar")
-    .data(data.friends)
-    .enter().append("rect")
-    .attr("class", "bar")
-    .attr("x", function(d) { return scaleX(d.name); })
-    .attr("width", scaleX.rangeBand())
-    .attr("y", function(d) { return scaleY(d.count); })
-    .attr("height", function(d) { return height - scaleY(d.count); });
+  .data(data.friends)
+  .enter().append("rect")
+  .attr("class", "bar")
+  .attr("x", function(d) { return scaleX(d.name); })
+  .attr("width", scaleX.rangeBand())
+  .attr("y", function(d) { return scaleY(d.count); })
+  .attr("height", function(d) { return height - scaleY(d.count); });
+
+  d3.select("input").on("change", change);
+
+  var sortTimeout = setTimeout(function() {
+    d3.select("input").property("checked", true).each(change);
+  }, 2000);
+
+  function change() {
+    clearTimeout(sortTimeout);
+
+    // Copy-on-write since tweens are evaluated after a delay.
+    var x0 = scaleX.domain(data.friends.sort(this.checked
+      ? function(a, b) { return b.count - a.count; }
+      : function(a, b) { return d3.ascending(a.name, b.name); })
+    .map(function(d) { return d.name; }))
+    .copy();
+
+    svg.selectAll(".bar")
+    .sort(function(a, b) { return x0(a.name) - x0(b.name); });
+
+    var transition = svg.transition().duration(750),
+    delay = function(d, i) { return i * 50; };
+
+    transition.selectAll(".bar")
+    .delay(delay)
+    .attr("x", function(d) { return x0(d.name); });
+
+    transition.select(".x.axis")
+    .call(xAxis)
+    .selectAll("g")
+    .delay(delay);
+  }
 });
