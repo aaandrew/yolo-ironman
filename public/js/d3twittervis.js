@@ -1,4 +1,9 @@
-var margin = {top: 20, right: 20, bottom: 40, left: 40};
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .html(function(d) { return '<span>' + d.name + " : " + d.count + '</span>' + ' followers' })
+  .offset([-12, 0]);
+
+var margin = {top: 75, right: 40, bottom: 40, left: 40};
 var width = 960 - margin.left - margin.right;
 var height = 500 - margin.top - margin.bottom;
 
@@ -25,6 +30,8 @@ var svg = d3.select("#d3starterchart").append("svg")
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+svg.call(tip);
 
 //get json object which contains media counts
 d3.json('/twitterMediaCounts', function(error, data) {
@@ -68,13 +75,15 @@ d3.json('/twitterMediaCounts', function(error, data) {
   .attr("x", function(d) { return scaleX(d.name); })
   .attr("width", scaleX.rangeBand())
   .attr("y", function(d) { return scaleY(d.count); })
-  .attr("height", function(d) { return height - scaleY(d.count); });
+  .attr("height", function(d) { return height - scaleY(d.count); })
+  .on('mouseover', tip.show)
+  .on('mouseout', tip.hide);
 
   d3.select("input").on("change", change);
 
-  var sortTimeout = setTimeout(function() {
+  /*var sortTimeout = setTimeout(function() {
     d3.select("input").property("checked", true).each(change);
-  }, 2000);
+  }, 2000);*/
 
   function change() {
     clearTimeout(sortTimeout);
