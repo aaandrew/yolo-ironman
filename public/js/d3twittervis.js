@@ -1,9 +1,10 @@
 var tip = d3.tip()
   .attr('class', 'd3-tip')
-  .html(function(d) { return '<span>' + d.name + " : " + d.count + '</span>' + ' followers' })
-  .offset([-12, 0]);
-
-var margin = {top: 75, right: 40, bottom: 40, left: 40};
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<span>"+d.name+" </span><strong>" + d.count + " followers</strong>";
+  })
+var margin = {top: 0, right: 40, bottom: 40, left: 40};
 var width = 960 - margin.left - margin.right;
 var height = 500 - margin.top - margin.bottom;
 
@@ -43,30 +44,6 @@ d3.json('/twitterMediaCounts', function(error, data) {
   //f(max > 1000000)
   scaleY.domain([0, max]);
 
-  //set up x axis
-  svg.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0," + height + ")") //move x-axis to the bottom
-    .call(xAxis)
-    .selectAll("text")  
-    .style("text-anchor", "end")
-    .attr("dx", "-.8em")
-    .attr("dy", ".15em")
-    .attr("transform", function(d) {
-      return "rotate(-65)" 
-    });
-
-  //set up y axis
-  svg.append("g")
-    .attr("class", "y axis")
-    .call(yAxis)
-    .append("text")
-    .attr("transform", "rotate(-90)")
-    .attr("y", 6)
-    .attr("dy", ".71em")
-    .style("text-anchor", "end")
-    .text("Number of Followers");
-
   //set up bars in bar graph
   svg.selectAll(".bar")
   .data(data.friends)
@@ -81,9 +58,9 @@ d3.json('/twitterMediaCounts', function(error, data) {
 
   d3.select("input").on("change", change);
 
-  /*var sortTimeout = setTimeout(function() {
+  var sortTimeout = setTimeout(function() {
     d3.select("input").property("checked", true).each(change);
-  }, 2000);*/
+  }, 2000);
 
   function change() {
     clearTimeout(sortTimeout);

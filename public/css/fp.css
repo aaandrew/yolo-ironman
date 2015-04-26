@@ -1,10 +1,5 @@
-.section{
-	font-size: 6em;
-	text-align: center;
-}
-
-#sortcheckbox{
-	margin-left: 3em;
+ #checkboxcontainer{
+  margin-left: 115%;
 }
 
 #d3starterchart{
@@ -16,24 +11,9 @@ body {
   width: 960px;
 }
 
-.axis text {
-  font: 10px sans-serif;
-}
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
 .bar {
   fill: steelblue;
   fill-opacity: .9;
-}
-
-.x.axis path {
-  display: none;
 }
 
 label {
