@@ -12,6 +12,19 @@ var prefix = "-webkit-transform" in document.body.style ? "-webkit-"
   : "-moz-transform" in document.body.style ? "-moz-"
   : "";
 
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<span>"+d.name+" </span><strong>" + d.count + " followers</strong>";
+  });
+
+function showtip(d){
+  var mousePos = d3.mouse(this);
+  console.log('hellooo', d);
+  console.log('from', mousePos);
+}
+
 d3.json("/twitterCustom", function(error, data) {
   var friendsArr = data.friends;
   for(var i in friendsArr){
@@ -48,7 +61,7 @@ d3.json("/twitterCustom", function(error, data) {
     return a.radius - b.radius;
   });
 
-  var system = d3.select("body").selectAll(".system")
+  var system = d3.select("#d3custom").selectAll(".system")
   .data(systems)
   .enter().append("div")
   .attr("class", "system")
@@ -78,22 +91,33 @@ d3.json("/twitterCustom", function(error, data) {
   .attr("transform", function(d) { return "translate(" + d.system.radius + "," + d.system.radius + ")"; })
   .attr("cx", function(d) { return x(d.semimajor_axis); })
   .attr("r", function(d) { return r(d.planet_radius); });
+
+  $('.system').tipsy({ 
+    fade: true,
+    gravity: 'n', 
+    html: true, 
+    offset: -15,
+    fallback: "If I die I'm a legend",
+    title: function() {
+      var d = this.__data__;
+      return "<span>" + d.key + " " + d.values[0].followers + " followers</span>"; 
+    }
+  });
+
 });
 
 function ftype(d){
   var rings = 0;
-  if(d.following > 2000){
-    rings = 6;
-  }else if(d.following > 1000){
+  if(d.following > 5000){
     rings = 5;
-  }else if(d.following > 800){
+  }else if(d.following > 2500){
     rings = 4;
-  }else if(d.following > 500){
+  }else if(d.following > 1000){
     rings = 3;
-  }else if(d.following > 300){
+  }else if(d.following > 700){
     rings = 2;
-  }else if(d.following > 150){
-    rings = 1
+  }else if(d.following > 300){
+    rings = 1;
   }
 
   var semimajor_axis = 0.02;
