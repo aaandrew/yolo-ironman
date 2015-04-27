@@ -11,6 +11,7 @@
   ],
   "dependencies": {
     "fullpage.js": "~2.6.4",
-    "d3-tip": "~0.6.6"
+    "d3-tip": "~0.6.6",
+    "bootstrap-social": "~4.9.0"
   }
 }

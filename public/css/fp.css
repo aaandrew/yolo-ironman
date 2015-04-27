@@ -1,3 +1,59 @@
+@font-face {
+  font-family: adamcgpro;
+  src: url("../fonts/adam-cg-pro.otf") format("opentype");
+}
+
+@import url(//fonts.googleapis.com/css?family=Open+Sans);
+
+
+/* Login */
+.intro{
+  margin-top: 10%;
+}
+
+.titletext{
+  color: #E9EAED;
+  text-align: center;
+  font-size: 4em;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+}
+
+.descriptiontext{
+  color: #E9EAED;
+  text-align: center;
+  font-size: 1.5em;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+}
+
+.loginContainer{
+  width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.loginButtons{
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+}
+
+.btn, .btn-large{
+  letter-spacing: 0px;
+  font-size: 12px;
+  text-transform: none;
+
+}
+
+.twitterLogin {
+  letter-spacing: 0px;
+
+}
+
+/* FP */
+
  #checkboxcontainer{
   margin-left: 115%;
 }
@@ -5,10 +61,10 @@
 #d3starterchart{
 	margin-left: 3em;
 }
+
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  position: relative;
-  width: 960px;
+  background-color: #1D1F20;
 }
 
 .bar {

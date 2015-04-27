@@ -2,9 +2,9 @@ var tip = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-10, 0])
   .html(function(d) {
-    return "<span>"+d.id+" </span><strong>" + d.followers + " followers</strong>";
+    return "<span>"+d.name+" </span><strong>" + d.count + " followers</strong>";
   });
-
+  
 var margin = {top: 0, right: 40, bottom: 40, left: 40};
 var width = 960 - margin.left - margin.right;
 var height = 500 - margin.top - margin.bottom;
@@ -33,6 +33,7 @@ var svg = d3.select("#d3starterchart").append("svg")
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+svg.call(tip);
 
 //get json object which contains media counts
 d3.json('/twitterMediaCounts', function(error, data) {

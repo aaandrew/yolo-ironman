@@ -100,7 +100,8 @@ d3.json("/twitterCustom", function(error, data) {
     fallback: "If I die I'm a legend",
     title: function() {
       var d = this.__data__;
-      return "<span>" + d.key + " " + d.values[0].followers + " followers</span>"; 
+      return "<strong>"+d.key+ "</strong>" +
+       "<div>"+d.values[0].followers+" followers</div>"; 
     }
   });
 
