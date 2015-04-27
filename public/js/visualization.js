@@ -1,6 +1,6 @@
 var margin = {top: 20, right: 20, bottom: 100, left: 40};
-var width = 960 - margin.left - margin.right;
-var height = 500 - margin.top - margin.bottom;
+var width = 900 - margin.left - margin.right;
+var height = 560 - margin.top - margin.bottom;
 
 //define scale of x to be from 0 to width of SVG, with .1 padding in between
 var scaleX = d3.scale.ordinal()

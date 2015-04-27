@@ -6,8 +6,8 @@ var tip = d3.tip()
   });
   
 var margin = {top: 0, right: 40, bottom: 40, left: 40};
-var width = 960 - margin.left - margin.right;
-var height = 500 - margin.top - margin.bottom;
+var width = 700 - margin.left - margin.right;
+var height = 420 - margin.top - margin.bottom;
 
 //define scale of x to be from 0 to width of SVG, with .1 padding in between
 var scaleX = d3.scale.ordinal()

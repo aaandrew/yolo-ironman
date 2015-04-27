@@ -1,10 +1,64 @@
+<style>
+	body {
+		background: #222;
+		position: relative;
+		text-align: center;
+	}
+
+	.system {
+		display: inline-block;
+		position: relative;
+		vertical-align: middle;
+	}
+
+	.orbit {
+		fill: none;
+		stroke: #ccc;
+		stroke-dasharray: 2,3;
+	}
+
+	.planet {
+		position: absolute;
+		top: 0;
+		left: 0;
+		-moz-animation-name: rotate;
+		-moz-animation-iteration-count: infinite;
+		-moz-animation-timing-function: linear;
+		-webkit-animation-name: rotate;
+		-webkit-animation-iteration-count: infinite;
+		-webkit-animation-timing-function: linear;
+		animation-name: rotate;
+		animation-iteration-count: infinite;
+		animation-timing-function: linear;
+	}
+
+	.planet circle {
+		fill: url(#planet-gradient);
+	}
+
+	@-moz-keyframes rotate {
+		from { -moz-transform: rotateZ(0deg); }
+		to { -moz-transform: rotateZ(-360deg); }
+	}
+
+	@-webkit-keyframes rotate {
+		from { -webkit-transform: rotateZ(0deg); }
+		to { -webkit-transform: rotateZ(-360deg); }
+	}
+
+	@keyframes rotate {
+		from { transform: rotateZ(0deg); }
+		to { transform: rotateZ(-360deg); }
+	}
+</style>
+
 <div id="fullpage">
 	<div class="section" id="section0">
 		<a id="homelink" href="/">home</a>
 		<p>Hi {{user.name}}, let's take a look at your friends!</p>
 	</div>
 	<div class="section" id="seciton1">
-		<p>Media Count of Twitter Friends</p>
+		<div id="mediacountlabel">Twitter Friends</div>
 		<div class="d3startercontainer">
 			<div id="check-awesome" class="form-group">    
 				<input type="checkbox" id="check-me">   
@@ -22,6 +76,20 @@
 		<p> Media Count of Your Instagram Followers using C3JS </p>
 		<div id="c3twitterchart"></div>
 	</div>
+	<div class="section" id="section3">
+		<div class="container">
+			<div id="d3custom">
+				<svg style="position:absolute;width:0;height:0;">
+					<defs>
+						<radialGradient id="planet-gradient" gradientUnits="objectBoundingBox" cx="50%" cy="50%" r="50%">
+							<stop offset="0%" stop-color="#aaa" stop-opacity="1"/>
+							<stop offset="100%" stop-color="#777" stop-opacity="1"/>
+						</radialGradient>
+					</defs>
+				</svg>
+			</div>
+		</div>
+	</div>
 </div>
 
 <link rel="stylesheet" type="text/css" href="css/checkbox.css">
@@ -31,14 +99,11 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#fullpage').fullpage({
-			anchors: ['firstPage', 'secondPage', 'third', 'fourth', 'fifth'],
-			sectionsColor: ['#2C3E50', '#E74C3C', '#ECF0F1', '#3498DB', '#2980B9'],
-			navigation: true,
-			navigationPosition: 'right',
-			navigationTooltips: ['First page', 'Second page', 'Third', 'fourth','fift'],
+			sectionsColor: ['#2C3E50', '#E74C3C', '#ECF0F1', '#222', '#2980B9'],
 			responsive: 900
 		});
 	});
 </script>
 <script src="js/d3twittervis.js"></script>
 <script src="js/c3twitter.js"></script>
+<script src="js/d3custom.js"></script> 
