@@ -1,40 +1,41 @@
 <div id="fullpage">
-    <div class="section" id="section0">
-    	<p>Hi {{user.name}}, let's take a look at your friends!</p>
-    </div>
-    <div class="section" id="seciton1">
-        <h1>Media Count of Twitter Friends</h1>
-        <div id="d3chart"></div>
-        <script src="js/visualization.js"></script>
-    </div>
-    <div class="section" id="section2">
-    	<h1> Media Count of Your Instagram Followers using C3JS </h1>
-        <div id="c3chart"></div>
-        <script src="js/c3visualization.js"></script>
-    </div>
-    <div class="section" id="section3">
-        <h1> Media Count of Your Instagram Followers </h1>
-        <div id="d3chart"></div>
-        <script src="js/visualization.js"></script>
-    </div>
-    <div class="section" id="section4">
-        <h1> Media Count of Your Instagram Followers </h1>
-        <div id="d3chart"></div>
-        <script src="js/visualization.js"></script>
-    </div>
+	<div class="section" id="section0">
+		<a id="homelink" href="/">home</a>
+		<p>Hi {{user.name}}, let's take a look at your friends!</p>
+	</div>
+	<div class="section" id="seciton1">
+		<h1>Media Count of Twitter Friends</h1>
+		<div id="d3chart"></div>
+		<script src="js/visualization.js"></script>
+	</div>
+	<div class="section" id="section2">
+		<h1> Media Count of Your Instagram Followers using C3JS </h1>
+		<div id="c3chart"></div>
+		<script src="js/c3visualization.js"></script>
+	</div>
+	<div class="section" id="section3">
+		<h1> Media Count of Your Instagram Followers </h1>
+		<div id="d3chart"></div>
+		<script src="js/visualization.js"></script>
+	</div>
+	<div class="section" id="section4">
+		<h1> Media Count of Your Instagram Followers </h1>
+		<div id="d3chart"></div>
+		<script src="js/visualization.js"></script>
+	</div>
 </div>
 
 <script type="text/javascript" src="bower_components/fullpage.js/vendors/jquery.slimscroll.min.js"></script>
 <script type="text/javascript" src="bower_components/fullpage.js/jquery.fullPage.js"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
-      $('#fullpage').fullpage({
-        anchors: ['firstPage', 'secondPage', 'third', 'fourth', 'fifth'],
-        sectionsColor: ['#2C3E50', '#E74C3C', '#ECF0F1', '#3498DB', '#2980B9'],
-        navigation: true,
-        navigationPosition: 'right',
-        navigationTooltips: ['First page', 'Second page', 'Third', 'fourth','fift'],
-        responsive: 900
-    });
-  });
+	$(document).ready(function() {
+		$('#fullpage').fullpage({
+			anchors: ['firstPage', 'secondPage', 'third', 'fourth', 'fifth'],
+			sectionsColor: ['#2C3E50', '#E74C3C', '#ECF0F1', '#3498DB', '#2980B9'],
+			navigation: true,
+			navigationPosition: 'right',
+			navigationTooltips: ['First page', 'Second page', 'Third', 'fourth','fift'],
+			responsive: 900
+		});
+	});
 </script>
