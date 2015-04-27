@@ -76,13 +76,21 @@
   right: 2.1em;
 }
 
- #checkboxcontainer{
-  margin-left: 115%;
-}
+/* Section 1 */
 
 #d3starterchart{
 	margin-left: 3em;
 }
+
+.d3startercontainer{
+  float: left;
+  margin-left: 5em;
+}
+
+#checkboxlabel{
+  color: white;
+}
+
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -90,7 +98,7 @@ body {
 }
 
 .bar {
-  fill: steelblue;
+  fill: pink;
   fill-opacity: .9;
 }
 

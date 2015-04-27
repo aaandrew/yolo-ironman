@@ -4,27 +4,28 @@
 		<p>Hi {{user.name}}, let's take a look at your friends!</p>
 	</div>
 	<div class="section" id="seciton1">
-		<h1>Media Count of Twitter Friends</h1>
-		<div id="d3chart"></div>
-		<script src="js/visualization.js"></script>
+		<p>Media Count of Twitter Friends</p>
+		<div class="d3startercontainer">
+			<div id="check-awesome" class="form-group">    
+				<input type="checkbox" id="check-me">   
+				<label id="checkboxlabel" for="check-me">
+					<span></span>
+					<span class="check"></span>
+					<span class="box"></span>
+					Sort
+				</label>  
+			</div>
+			<div id="d3starterchart"></div>
+		</div>
 	</div>
 	<div class="section" id="section2">
-		<h1> Media Count of Your Instagram Followers using C3JS </h1>
-		<div id="c3chart"></div>
-		<script src="js/c3visualization.js"></script>
-	</div>
-	<div class="section" id="section3">
-		<h1> Media Count of Your Instagram Followers </h1>
-		<div id="d3chart"></div>
-		<script src="js/visualization.js"></script>
-	</div>
-	<div class="section" id="section4">
-		<h1> Media Count of Your Instagram Followers </h1>
-		<div id="d3chart"></div>
-		<script src="js/visualization.js"></script>
+		<p> Media Count of Your Instagram Followers using C3JS </p>
+		<div id="c3twitterchart"></div>
 	</div>
 </div>
 
+<link rel="stylesheet" type="text/css" href="css/checkbox.css">
+<script type="text/javascript" src="js/checkbox.js"></script>
 <script type="text/javascript" src="bower_components/fullpage.js/vendors/jquery.slimscroll.min.js"></script>
 <script type="text/javascript" src="bower_components/fullpage.js/jquery.fullPage.js"></script>
 <script type="text/javascript">
@@ -39,3 +40,5 @@
 		});
 	});
 </script>
+<script src="js/d3twittervis.js"></script>
+<script src="js/c3twitter.js"></script>
