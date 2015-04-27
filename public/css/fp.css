@@ -13,16 +13,21 @@
 
 .titletext{
   color: #E9EAED;
-  text-align: center;
   font-size: 4em;
-  font-family: 'Open Sans', sans-serif;
+  text-align: center;
+  font-family: 'adamcgpro', sans-serif;
   font-weight: 300;
+  letter-spacing: 10px;
+  width: 265px;
+  margin-right:auto;
+  margin-left:auto;
+  overflow-wrap: break-word;
 }
 
 .descriptiontext{
   color: #E9EAED;
   text-align: center;
-  font-size: 1.5em;
+  font-size: 1.1em;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
 }
@@ -34,7 +39,7 @@
 }
 
 .loginButtons{
-  width: 200px;
+  width: 180px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
@@ -53,6 +58,17 @@
 }
 
 /* FP */
+
+#fp-nav ul li a span, .fp-slidesNav ul li a span {
+  background-color: #E9EAED;
+}
+
+#section0{
+  color: #E9EAED;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
 
  #checkboxcontainer{
   margin-left: 115%;

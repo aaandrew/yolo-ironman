@@ -403,7 +403,7 @@ app.get('/auth/twitter',
 app.get('/auth/twitter/callback', 
   passport.authenticate('twitter', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/d3custom');
+    res.redirect('/account');
   });
 
 app.get('/d3twittervis', ensureAuthenticatedInstagram, function (req, res){

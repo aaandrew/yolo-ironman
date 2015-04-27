@@ -1,18 +1,26 @@
 <div id="fullpage">
     <div class="section" id="section0">
-    	<p>ID: {{user.id}}</p>
-    	<p>Name: {{user.name}}</p>
-    	<p>Instagram ID:{{user.ig_id}}</p>
+    	<p>Hi {{user.name}}, let's take a look at your friends!</p>
     </div>
     <div class="section" id="seciton1">
-    	<h1> Media Count of Your Instagram Followers using C3JS </h1>
-    	<div id="c3chart"></div>
-    	<script src="js/c3visualization.js"></script>
+        <h1>Media Count of Twitter Friends</h1>
+        <div id="d3chart"></div>
+        <script src="js/visualization.js"></script>
     </div>
-	    <div class="section" id="section2">
-    	<h1> Media Count of Your Instagram Followers </h1>
-    	<div id="d3chart"></div>
-    	<script src="js/visualization.js"></script>
+    <div class="section" id="section2">
+    	<h1> Media Count of Your Instagram Followers using C3JS </h1>
+        <div id="c3chart"></div>
+        <script src="js/c3visualization.js"></script>
+    </div>
+    <div class="section" id="section3">
+        <h1> Media Count of Your Instagram Followers </h1>
+        <div id="d3chart"></div>
+        <script src="js/visualization.js"></script>
+    </div>
+    <div class="section" id="section4">
+        <h1> Media Count of Your Instagram Followers </h1>
+        <div id="d3chart"></div>
+        <script src="js/visualization.js"></script>
     </div>
 </div>
 
@@ -21,11 +29,11 @@
 <script type="text/javascript">
     $(document).ready(function() {
       $('#fullpage').fullpage({
-        anchors: ['firstPage', 'secondPage', '3rdPage'],
-        sectionsColor: ['#C63D0F', '#1BBC9B', '#7E8F7C'],
+        anchors: ['firstPage', 'secondPage', 'third', 'fourth', 'fifth'],
+        sectionsColor: ['#2C3E50', '#E74C3C', '#ECF0F1', '#3498DB', '#2980B9'],
         navigation: true,
         navigationPosition: 'right',
-        navigationTooltips: ['First page', 'Second page', 'Third and last page'],
+        navigationTooltips: ['First page', 'Second page', 'Third', 'fourth','fift'],
         responsive: 900
     });
   });
