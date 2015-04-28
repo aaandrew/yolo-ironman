@@ -69,14 +69,20 @@
 					Sort
 				</label>  
 			</div>
-			<div id="d3starterchart"></div>
+			<div class="d3starterchart"></div>
+			<script src="js/d3twittervis.js"></script>
 		</div>
 	</div>
 	<div class="section" id="section2">
-		<p> Media Count of Your Instagram Followers using C3JS </p>
-		<div id="c3twitterchart"></div>
+		<p>Let's look at the current trends on twitter!</p>
 	</div>
 	<div class="section" id="section3">
+		<div id="c3twitterchart"></div>
+	</div>
+	<div class="section" id="section4">
+		<div id="c3twitterchart"></div>
+	</div>
+	<div class="section" id="section5">
 		<div class="container">
 			<div id="d3custom">
 				<svg style="position:absolute;width:0;height:0;">
@@ -99,11 +105,12 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#fullpage').fullpage({
-			sectionsColor: ['#2C3E50', '#E74C3C', '#ECF0F1', '#222', '#2980B9'],
-			responsive: 900
+			sectionsColor: ['#2C3E50', '#5B7876', '#2C3E50', '#ECF0F1', '#5B7876', '#222'],
+			responsive: 3000,
+			scrollOverflow: false
+
 		});
 	});
 </script>
-<script src="js/d3twittervis.js"></script>
 <script src="js/c3twitter.js"></script>
 <script src="js/d3custom.js"></script> 

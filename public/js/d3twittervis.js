@@ -2,7 +2,7 @@ var tip = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-10, 0])
   .html(function(d) {
-    return "<span>"+d.name+" </span><strong>" + d.count + " followers</strong>";
+    return "<span>"+d.name+" </span><p>" + d.count + " followers</p>";
   });
   
 var margin = {top: 0, right: 40, bottom: 40, left: 40};
@@ -27,7 +27,9 @@ var yAxis = d3.svg.axis()
   .orient("left");
 
 //create svg
-var svg = d3.select("#d3starterchart").append("svg")
+  $(document).ready(function() {
+
+var svg = d3.select(".d3starterchart").append("svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -88,4 +90,5 @@ d3.json('/twitterMediaCounts', function(error, data) {
     .selectAll("g")
     .delay(delay);
   }
+});
 });
