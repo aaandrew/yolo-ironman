@@ -192,3 +192,37 @@ em{
 .planetcontainer{
   max-width: 800px;
 }
+
+/** Section 6 **/
+#worldMap {
+  height: 400px;
+  width: 500px;
+}
+
+
+/* Medium devices (desktops, 992px and up) */
+@media (max-width: 992px) {   
+    .mapContainer {
+      width: 100%;
+      margin: auto;
+      margin-top: 50px;
+    }
+
+    #container {
+      margin: auto;
+    }
+ }
+
+#topic{
+  color: white;
+}
+
+.bubbles{
+  -moz-box-shadow: 0 0 5px #fff;
+  -webkit-box-shadow: 0 0 5px #fff;
+  box-shadow: 0px 0px 5px #fff;
+}
+
+#input{
+  color: white;
+}

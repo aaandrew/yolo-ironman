@@ -2,7 +2,6 @@
 var express = require('express');
 var passport = require('passport');
 var InstagramStrategy = require('passport-instagram').Strategy;
-var http = require('http');
 var path = require('path');
 var handlebars = require('express-handlebars');
 var bodyParser = require('body-parser');
@@ -15,11 +14,20 @@ var async = require('async');
 
 var TwitterStrategy = require('passport-twitter').Strategy;
 var twit = require('twit');
+var Twitter = require('node-tweet-stream');
+
 
 var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+var geocoderProvider = 'nominatimmapquest';
+var httpAdapter = 'http';
+var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter);
 
 //local dependencies
 var models = require('./models');
+
+var current = 'justin bieber';
 
 //client id and client secret here, taken from .env
 dotenv.load();
@@ -403,6 +411,55 @@ app.get('/auth/twitter',
 app.get('/auth/twitter/callback', 
   passport.authenticate('twitter', { failureRedirect: '/login' }),
   function(req, res) {
+    var query  = models.User.where({ ig_id: req.user.ig_id });
+    query.findOne(function (err, user) {
+      if (err) return err;
+      if (user) {
+        var tw = new Twitter({
+          consumer_key: TWITTER_CLIENT_ID,
+          consumer_secret: TWITTER_CLIENT_SECRET,
+          token: user.ig_access_token,
+          token_secret: user.secret_token
+        });
+
+        // Twitter Stream
+        tw.on('tweet', function(tweet){
+          if(tweet.coordinates){
+            console.log('tweet received', tweet.text);
+            console.log('coor', tweet.coordinates[0], tweet.coordinates[1]);
+            io.emit('tweet', {latitude: tweet.coordinates[0], longitude: tweet.coordinates[1]});
+          }else if(tweet.user.location){
+            geocoder.geocode(tweet.user.location, function(err, res) {
+              if(!err && res && res[0]){
+                io.emit('tweet', {latitude: res[0].latitude, longitude: res[0].longitude});
+                console.log('country', res[0].latitude, ' city ', res[0].longitude);
+              }
+            });
+          }
+        });
+
+        tw.on('error', function (err) {
+          console.log('Oh no');
+        });
+
+        tw.track(current);
+
+        io.on('connection', function(socket){
+          console.log('connected');
+          socket.emit('topic', current);
+
+          socket.on('change', function(data){
+            console.log('current is', current);
+            console.log('changing to', data);
+            tw.untrack(current);
+            tw.track(data);
+            current = data;
+            socket.emit('topic', current);
+          });
+        });
+
+      }
+    });
     res.redirect('/account');
   });
 
@@ -419,6 +476,7 @@ app.get('/logout', function(req, res){
   res.redirect('/');
 });
 
-http.createServer(app).listen(app.get('port'), function() {
+
+http.listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));
 });
