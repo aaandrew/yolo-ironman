@@ -63,11 +63,19 @@
   background-color: #E9EAED;
 }
 
+/** Section 0 **/
+
 #section0{
   color: #E9EAED;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+}
+
+.introtext{
+  max-width: 21em;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #homelink{
@@ -76,6 +84,10 @@
   right: 2.1em;
   font-size: 12px;
   color: #E9EAED;
+}
+
+.spanbold{
+  font-size: 2em;
 }
 
 /* Section 1 */
@@ -104,12 +116,17 @@
 
 #check-awesome{
   margin-right: 15%;
+  transform: translateY(-3em);
 }
 
 .d3-tip{
-  background-color: #f7484e;
+  background-color: #bf393b;
   font-family: 'Open Sans', sans-serif;
   font-size: 10px;
+}
+
+.d3-tip:after {
+  color: #bf393b;
 }
 
 
@@ -124,7 +141,7 @@ body {
 }
 
 .bar:hover {
-  fill: #d64045;
+  fill: #bf393b;
 }
 
 label {
@@ -138,14 +155,38 @@ label {
   color: #E9EAED;
 }
 
-#section2header{
+
+/** Section 4 **/
+#section4{
+  color: #E9EAED;
+  text-align: left;
+}
+
+#section4container{
+  max-width: 33em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#section4b{
+  font-style: italic;
 
 }
 
-#section2desc{
-
+#section4c{
+  max-width: 30em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  text-align: left;
 }
 
+em{
+  font-size: 1.5em;
+  color: #f7484e;
+  margin-left: 3px;
+  margin-right: 3px;
+}
 
 /** Section 5 **/
 .planetcontainer{

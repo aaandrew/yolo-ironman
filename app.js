@@ -284,7 +284,7 @@ app.get('/twitterTrends', ensureAuthenticatedInstagram, function(req, res){
         access_token:         user.ig_access_token,
         access_token_secret:  user.secret_token
       });
-      Twit.get('trends/place', { id: 1 }, function(err, data, response) {
+      Twit.get('trends/place', { id: 23424977 }, function(err, data, response) {
         if(err) return err;
         var trends = data[0].trends.slice(0, data[0].trends.length/2);
         var asyncTasks = [];

@@ -22,11 +22,10 @@
   font-size: 10px;
   width: 100%;
   line-height: 1;
-  color: rgba(0, 0, 0, 0.8);
+  color: #bf393b;
   content: "\25BC";
   position: absolute;
   text-align: center;
-  background-color: #f7484e;
 }
 
 /* Style northward tooltips differently */

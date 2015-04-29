@@ -55,7 +55,7 @@
 <div id="fullpage">
 	<div class="section" id="section0">
 		<a id="homelink" href="/">home</a>
-		<p>Hi {{user.name}}, let's take a look at your friends!</p>
+		<div class="introtext">This app visualizes your twitter data. Let's take a look at some of the people you're following.</div>
 	</div>
 	<div class="section" id="seciton1">
 		<div class="d3startercontainer">
@@ -73,14 +73,17 @@
 		</div>
 	</div>
 	<div class="section" id="section2">
-		<div id="section2header" class="section2text">Let's look at the current trends on twitter!</div>
-		<div id="section2desc" class="section2text">This shows</div>
+		<div id="section2header" class="section2text">Awesome! Now let's check out the top trends on twitter!</div>
 	</div>
 	<div class="section" id="section3">
 		<div id="c3twitterchart"></div>
 	</div>
 	<div class="section" id="section4">
-		<div id="c3twitterchart"></div>
+		<div id="section4container">
+			<div id="section4a">And now let's understand the influence of the people you're following.</div>
+			<div id="section4b">Here's a brief explanation of the visualization below:</div>
+			<div id="section4c">The <em>size</em> of the orbit is proportional to their number of followers. The amount of <em>inner orbits</em> is related to the number of people they're following. And the <em>speed</em> of the planet orbit is correlated to their total number of tweets or activity.</div>
+		</div>
 	</div>
 	<div class="section" id="section5">
 		<div class="container planetcontainer">
@@ -105,7 +108,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#fullpage').fullpage({
-			sectionsColor: ['#292929', '#fff', '#ECF0F1', '#fff', '#292929', '#222'],
+			sectionsColor: ['#292929', '#fff', '#f7484e', '#fff', '#292929', '#222'],
 			responsive: 3000,
 			scrollOverflow: false
 
