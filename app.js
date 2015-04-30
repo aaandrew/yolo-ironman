@@ -432,7 +432,7 @@ app.get('/auth/twitter/callback',
             geocoder.geocode(tweet.user.location, function(err, res) {
               if(!err && res && res[0]){
                 io.emit('tweet', {latitude: res[0].latitude, longitude: res[0].longitude});
-                //console.log('country', res[0].latitude, ' city ', res[0].longitude);
+                console.log('country', res[0].latitude, ' city ', res[0].longitude);
               }
             });
           }

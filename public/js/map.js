@@ -11,7 +11,7 @@ var EventMap = function(){
 			fills: {
 				defaultFill: '#00FF00',
 				lt50: 'white',
-				gt50: 'white'
+				gt50: '#266A2E'
 			},
 
 			data: {
@@ -30,7 +30,7 @@ EventMap.prototype.add = function(lati, longi) {
 	var coords = {
 		latitude: lati,
 		longitude: longi,
-		radius: 4,
+		radius: 5,
 		fillKey: 'gt50',
 		popupOnHover: false,
 		borderColor: 'rgba(255, 255, 255, 0.2)',
