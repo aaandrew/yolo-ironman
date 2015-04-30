@@ -33,7 +33,7 @@ EventMap.prototype.add = function(lati, longi) {
 		radius: 4,
 		fillKey: 'gt50',
 		popupOnHover: false,
-		borderColor: 'transparent',
+		borderColor: 'rgba(255, 255, 255, 0.2)',
 		highlightOnHover: false,
 		highlightFillColor: '#FC8D59'
 	};
@@ -65,9 +65,4 @@ EventMap.prototype.add = function(lati, longi) {
 			map.add(coords.latitude, coords.longitude);
 		});
 
-		$('#formsubmit').submit(function(e){
-			socket.emit('change', $("#input").val());
-			$("#input").val('');
-			return false;
-		});
 	});

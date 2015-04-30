@@ -108,7 +108,7 @@
 			</div>
 		<form id="formsubmit" role="form">
 			<paper-input id="input" type="text" label="search twitter" name="query" class="custom"></paper-input>
-			<paper-button id="submitbutton" type="submit" class="hover" extends="input">Submit</paper-button>
+			<paper-button id="submitbutton" class="hover" onclick="submitting()">Submit</paper-button>
 		</form>
 		<span id="labelspan">currently searching for <span id="topic">justin bieber</span><span>
 	</div>
@@ -124,9 +124,9 @@
 			sectionsColor: ['#292929', '#fff', '#f7484e', '#fff', '#292929', '#222', ,'#222','#292929'],
 			responsive: 3000,
 			scrollOverflow: false
-
 		});
 	});
+
 </script>
 
 <link rel="import" href="bower_components/polymer/polymer.html">
@@ -135,6 +135,22 @@
 <script src="js/c3twitter.js"></script>
 <script src="js/d3custom.js"></script> 
 <script src="js/map.js"></script>
+<script>
+
+	$(document).keypress(function(e){
+    if (e.which == 13){
+        $("#submitbutton").click();
+    }
+  });
+	
+	function submitting(){
+		if ($("#input").val() != ''){
+			socket.emit('change', $("#input").val());
+			$("#input").val('');
+		}
+		return false;
+	}
+</script>
 
 
 
