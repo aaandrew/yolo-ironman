@@ -193,6 +193,10 @@ em{
   max-width: 800px;
 }
 
+#section5{
+  padding-bottom: 4em;
+}
+
 /** Section 6 **/
 #worldMap {
   height: 400px;
