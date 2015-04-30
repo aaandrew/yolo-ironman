@@ -30,7 +30,7 @@ EventMap.prototype.add = function(lati, longi) {
 	var coords = {
 		latitude: lati,
 		longitude: longi,
-		radius: 3,
+		radius: 4,
 		fillKey: 'gt50',
 		popupOnHover: false,
 		borderColor: 'transparent',

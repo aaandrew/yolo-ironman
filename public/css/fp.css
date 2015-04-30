@@ -213,10 +213,6 @@ em{
     }
  }
 
-#topic{
-  color: white;
-}
-
 .bubbles{
   -moz-box-shadow: 0 0 5px #fff;
   -webkit-box-shadow: 0 0 5px #fff;
@@ -225,4 +221,29 @@ em{
 
 #input{
   color: white;
+  font-size: 12px;
+}
+
+
+.custom /deep/ .focused-underline {
+  background-color: #00FF00;
+}
+
+#submitbutton{
+  color: white;
+  margin-top: 5px;
+  transform: translate(-5px, 2px);
+  font-size:12px;
+  text-transform: lowercase;
+}
+
+#labelspan{
+  color: white;
+  padding-bottom: 2em;
+  font-size: 12px;
+}
+
+#topic{
+  color: #00FF00;
+  font-size: 1.1em;
 }

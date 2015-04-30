@@ -100,14 +100,17 @@
 		</div>
 	</div>
 	<div class="section" id="section6">
+		<div class="section2text">And as a bonus</div>
+	</div>
+	<div class="section" id="section7">
 		<div class="mapContainer">
 			<div id="container" style="position: relative; width: 650px; height: 500px; margin: auto;"></div>
 			</div>
 		<form id="formsubmit" role="form">
-			<paper-input id="input" type="text" label="search twitter" name="query"></paper-input>
-			<button type="submit">Submit</button>
+			<paper-input id="input" type="text" label="search twitter" name="query" class="custom"></paper-input>
+			<paper-button id="submitbutton" type="submit" class="hover" extends="input">Submit</paper-button>
 		</form>
-		<p id="topic">justin bieber</p>
+		<span id="labelspan">currently searching for <span id="topic">justin bieber</span><span>
 	</div>
 </div>
 
@@ -118,7 +121,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#fullpage').fullpage({
-			sectionsColor: ['#292929', '#fff', '#f7484e', '#fff', '#292929', '#222', '#292929'],
+			sectionsColor: ['#292929', '#fff', '#f7484e', '#fff', '#292929', '#222', ,'#222','#292929'],
 			responsive: 3000,
 			scrollOverflow: false
 
@@ -128,6 +131,7 @@
 
 <link rel="import" href="bower_components/polymer/polymer.html">
 <link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/paper-button/paper-button.html">
 <script src="js/c3twitter.js"></script>
 <script src="js/d3custom.js"></script> 
 <script src="js/map.js"></script>
