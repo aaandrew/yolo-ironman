@@ -427,12 +427,14 @@ app.get('/auth/twitter/callback',
           if(tweet.coordinates){
             console.log('tweet received', tweet.text);
             console.log('coor', tweet.coordinates[0], tweet.coordinates[1]);
-            io.emit('tweet', {latitude: tweet.coordinates[0], longitude: tweet.coordinates[1]});
+            if(tweet.coordinates[0] && tweet.coordinates[1]){
+              io.emit('tweet', {latitude: tweet.coordinates[0], longitude: tweet.coordinates[1]});              
+            }
           }else if(tweet.user.location){
             geocoder.geocode(tweet.user.location, function(err, res) {
               if(!err && res && res[0]){
                 io.emit('tweet', {latitude: res[0].latitude, longitude: res[0].longitude});
-                console.log('country', res[0].latitude, ' city ', res[0].longitude);
+                //console.log('country', res[0].latitude, ' city ', res[0].longitude);
               }
             });
           }

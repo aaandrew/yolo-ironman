@@ -56,8 +56,9 @@
 	<div class="section" id="section0">
 		<a id="homelink" href="/">home</a>
 		<div class="introtext">This app visualizes your twitter data. Let's take a look at some of the people you're following.</div>
+		<div class="scrollIndicator"></div>
 	</div>
-	<div class="section" id="seciton1">
+	<div class="section" id="section1">
 		<div class="d3startercontainer">
 			<div id="check-awesome" class="form-group">    
 				<input type="checkbox" id="check-me">   
@@ -142,6 +143,12 @@
         $("#submitbutton").click();
     }
   });
+
+  $(".scrollIndicator").click(function() {
+    $('html, body').animate({
+        scrollTop: $("#section1").offset().top
+    }, 500);
+});
 	
 	function submitting(){
 		if ($("#input").val() != ''){

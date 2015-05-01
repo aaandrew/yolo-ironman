@@ -76,13 +76,14 @@
   max-width: 21em;
   margin-left: auto;
   margin-right: auto;
+  font-size: 2em;
 }
 
 #homelink{
   position: fixed;
   top: 1.1em;
   right: 2.1em;
-  font-size: 12px;
+  font-size: 1.3em;
   color: #E9EAED;
 }
 
@@ -153,6 +154,9 @@ label {
 /** Section 2 **/
 .section2text{
   color: #E9EAED;
+  font-size: 2em;
+  max-width: 21em;
+  margin: auto;
 }
 
 
@@ -160,6 +164,7 @@ label {
 #section4{
   color: #E9EAED;
   text-align: left;
+  font-size: 1.5em;
 }
 
 #section4container{
@@ -182,7 +187,7 @@ label {
 }
 
 em{
-  font-size: 1.5em;
+  font-size: 1.6em;
   color: #f7484e;
   margin-left: 3px;
   margin-right: 3px;
@@ -250,4 +255,74 @@ em{
 #topic{
   color: #00FF00;
   font-size: 1.1em;
+}
+
+@-webkit-keyframes scroll-indicate {
+  0% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes scroll-indicate {
+  0% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.scrollIndicator {
+  position: absolute;
+  width: 100%;
+  top: 85%;
+  cursor: pointer;
+}
+
+.scrollIndicator:before {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+  border-bottom: 1px solid #E9EAED;
+  border-left: 1px solid #E9EAED;
+  box-sizing: border-box;
+  content: "";
+  top: 0px;
+  left: 50%;
+  margin-left: -6px;
+  -webkit-animation: scroll-indicate 2s linear 0s infinite;
+          animation: scroll-indicate 2s linear 0s infinite;
+}
+.scrollIndicator:after {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+  border-bottom: 1px solid #E9EAED;
+  border-left: 1px solid #E9EAED;
+  box-sizing: border-box;
+  content: "";
+  top: 6px;
+  left: 50%;
+  margin-left: -6px;
+  -webkit-animation: scroll-indicate 2s linear 0.25s infinite;
+          animation: scroll-indicate 2s linear 0.25s infinite;
 }
